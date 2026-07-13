@@ -10,6 +10,12 @@ const testRoot = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(testRoot, "..");
 const samplePdfPath = path.join(projectRoot, "site", "sample", "parallel-sample.pdf");
 const samplePngPath = path.join(projectRoot, "site", "sample", "parallel-sample.png");
+const standardFontDataUrl = `${path.join(
+  projectRoot,
+  "node_modules",
+  "pdfjs-dist",
+  "standard_fonts",
+).replaceAll("\\", "/")}/`;
 const languagePath = path.join(
   projectRoot,
   "node_modules",
@@ -20,7 +26,7 @@ const languagePath = path.join(
 
 test("the safe sample is a one-page image-only PDF", async () => {
   const data = new Uint8Array(await readFile(samplePdfPath));
-  const pdf = await getDocument({ data, disableWorker: true }).promise;
+  const pdf = await getDocument({ data, disableWorker: true, standardFontDataUrl }).promise;
   assert.equal(pdf.numPages, 1);
 
   const page = await pdf.getPage(1);
