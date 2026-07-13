@@ -1,0 +1,17 @@
+{
+  "name": "alpha2-parallel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:test": "node scripts/build.mjs --include-test-assets",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "npm run build:test && npm test"
+  },
+  "dependencies": {
+    "@tesseract.js-data/eng": "1.0.0",
+    "pdf-lib": "1.17.1",
+    "pdfjs-dist": "5.4.624",
+    "tesseract.js": "7.0.0"
+  }
+}

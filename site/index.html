@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A private, browser-local workspace for creating English-French reading pages from scanned PDFs.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; worker-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; media-src 'none'">
+  <title>Parallel | Alpha2</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-app-status="ready">
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Parallel home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>Parallel</span>
+    </a>
+    <p class="privacy-badge"><span aria-hidden="true"></span>Local processing</p>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">English <span aria-hidden="true">/</span> Français</p>
+        <h1 id="page-title">Read across<br>the language.</h1>
+      </div>
+      <p class="summary">
+        Turn one page of a scanned English PDF into an editable bilingual reading sheet. Your document stays in this browser; only the converter libraries are downloaded.
+      </p>
+    </section>
+
+    <section class="workbench" aria-labelledby="source-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">01 · Source</p>
+          <h2 id="source-title">Choose a PDF page</h2>
+        </div>
+        <p class="section-note">The first milestone processes one page at a time so every translation can be reviewed.</p>
+      </div>
+
+      <div class="source-grid">
+        <div class="source-controls">
+          <label class="file-drop" for="pdf-file">
+            <span class="file-icon" aria-hidden="true">PDF</span>
+            <span>
+              <strong id="file-prompt">Choose a scanned PDF</strong>
+              <small id="file-detail">The file is opened locally and is never submitted.</small>
+            </span>
+            <input id="pdf-file" type="file" accept="application/pdf,.pdf">
+          </label>
+
+          <div class="sample-route">
+            <span>New here?</span>
+            <button id="try-sample" class="text-button" type="button">Try the safe sample</button>
+          </div>
+
+          <div class="page-controls">
+            <label for="page-number">Page</label>
+            <input id="page-number" type="number" min="1" value="1" inputmode="numeric" disabled>
+            <button id="process-page" class="primary-button" type="button" disabled>Convert page</button>
+          </div>
+
+          <div class="status-panel" role="status" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <div>
+              <strong id="status-title">Ready for a document</strong>
+              <p id="status-detail">Choose a PDF to begin.</p>
+            </div>
+          </div>
+        </div>
+
+        <figure class="page-preview">
+          <canvas id="source-canvas" aria-label="Selected source page preview"></canvas>
+          <figcaption id="preview-caption">Selected page preview</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="workbench translation-workbench" aria-labelledby="translation-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">02 · Review</p>
+          <h2 id="translation-title">Shape the parallel text</h2>
+        </div>
+        <p class="section-note">OCR and machine translation can be wrong. Both columns remain editable before export.</p>
+      </div>
+
+      <div class="column-legend" aria-hidden="true">
+        <span>English</span>
+        <span>Français</span>
+      </div>
+      <div id="empty-translation" class="empty-state">
+        <span aria-hidden="true">Aa</span>
+        <p>Converted paragraphs will appear here in aligned pairs.</p>
+      </div>
+      <ol id="translation-rows" class="translation-rows" aria-label="Bilingual paragraph pairs"></ol>
+
+      <div class="review-actions">
+        <div class="review-buttons">
+          <button id="add-row" class="secondary-button" type="button">Add paragraph pair</button>
+          <button id="translate-rows" class="primary-button" type="button" hidden disabled>Translate on this device</button>
+        </div>
+        <p id="completion-message">Convert a page or add a paragraph pair manually.</p>
+      </div>
+    </section>
+
+    <section class="export-panel" aria-labelledby="export-title">
+      <div>
+        <p class="section-label">03 · Export</p>
+        <h2 id="export-title">Keep your reading copy</h2>
+        <p>Download a self-contained HTML document and a polished two-column PDF.</p>
+      </div>
+      <div class="export-fields">
+        <label for="document-title">Document title</label>
+        <input id="document-title" type="text" value="Bilingual reading page" maxlength="120">
+      </div>
+      <div class="export-actions">
+        <a id="download-html" class="primary-button button-link" aria-disabled="true">Download HTML</a>
+        <a id="download-pdf" class="secondary-button button-link" aria-disabled="true">Download PDF</a>
+      </div>
+    </section>
+
+    <noscript>This converter requires JavaScript for local PDF rendering, OCR, and export.</noscript>
+  </main>
+
+  <footer>
+    <p>Parallel is a private conversion tool made by Alpha2. It does not publish or upload your source document.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
